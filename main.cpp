@@ -20,7 +20,8 @@ bool readData(unsigned long* numberOfBytesRead, unsigned long bufferSize, char* 
 
 	ClearCommError(port, &errors, &comstat);
 	
-	if (comstat.cbInQue > 0) {
+	if (comstat.cbInQue > 0) 
+	{
 		if (ReadFile(port, buffer, bufferSize,numberOfBytesRead, NULL) == false)
 			cout << "read error" << endl;
 	}
@@ -30,16 +31,19 @@ bool readData(unsigned long* numberOfBytesRead, unsigned long bufferSize, char* 
 	return 1;
 }
 
-void printData(char* buffer, unsigned long size) {
+void printData(char* buffer, unsigned long size) 
+{
 	for (unsigned long i = 0; i < size; i++)
 	{
 		cout << buffer[i];
 	}
 }
 
-char* readFile(char* filename, unsigned long& size) {
+char* readFile(char* filename, unsigned long& size) 
+{
 	HANDLE file = CreateFileA(filename, GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-	if (port == INVALID_HANDLE_VALUE) {
+	if (port == INVALID_HANDLE_VALUE) 
+	{
 		cout << "Error open file" << endl;
 		exit(1);
 	}
@@ -50,9 +54,11 @@ char* readFile(char* filename, unsigned long& size) {
 	return buffer;
 }
 
-int main() {
+int main() 
+{
 	port = CreateFile(L"COM5", GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
-	if (port == INVALID_HANDLE_VALUE) {
+	if (port == INVALID_HANDLE_VALUE) 
+	{
 		cout << "Error create file" << endl;
 		exit(1);
 	}
@@ -74,12 +80,14 @@ int main() {
 	char* bufferOut = readFile((char*)"art.txt", bufSize);
 	char* bufferIn = new char[strlen(bufferOut)];
 
-	if(writeData(strlen(bufferOut), bufferOut) == false) {
+	if(writeData(strlen(bufferOut), bufferOut) == false) 
+	{
 		cout << "write error" << endl;
 	}
 
 	unsigned long bytesRead;
-	if (readData(&bytesRead, strlen(bufferOut), bufferIn)) {
+	if (readData(&bytesRead, strlen(bufferOut), bufferIn)) 
+	{
 		printData(bufferIn, bytesRead);
 		cout << endl;
 	}
