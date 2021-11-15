@@ -80,7 +80,6 @@ int main() {
 
 	unsigned long bytesRead;
 	if (readData(&bytesRead, strlen(bufferOut), bufferIn)) {
-
 		printData(bufferIn, bytesRead);
 		cout << endl;
 	}
